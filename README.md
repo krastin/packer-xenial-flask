@@ -17,8 +17,7 @@ ToDo
     
 
 # How to test
-
-    make kitchen
+ToDO
     
 
 # Purpose
@@ -30,13 +29,13 @@ This repository attempts to store the minimum amount of code that is required to
 - for VirtualBox
 
 # To Do
-- [ ] create json template file
-- [ ] copy boot provisioning script
-- [ ] create makefile
-- [ ] add kitchen install
+- [ ] add kitchen install instructions
 - [ ] create kitchen test
 - [ ] add kitchen test to makefile
-- [ ] add nginx to box
 
 # Done
+- [x] add nginx to box
+- [x] create json template file
+- [x] copy boot provisioning script
+- [x] create makefile
 - [x] build initial readme
