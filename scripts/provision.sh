@@ -55,6 +55,9 @@ DEBIAN_FRONTEND=noninteractive DEBIAN_PRIORITY=critical apt-get -q -y -o "Dpkg::
 # Install nginx
 apt-get -y install nginx
 
+# Install some tools
+apt-get -y install jq curl unzip
+
 apt-get autoremove -y
 apt-get clean
 

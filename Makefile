@@ -11,5 +11,5 @@ nginx64-2-vbox.box: nginx64.json scripts/provision.sh http/preseed.cfg
 
 .PHONY: clean
 clean:
-	-vagrant box remove -f nginx64 --provider virtualbox
+	-vagrant box remove -f nginx64-2 --provider virtualbox
 	-rm -fr output-*/ *.box
