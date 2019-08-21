@@ -1,5 +1,5 @@
-# packer-nginx64-vagrant-2
-A vagrant box based on ubuntu xenial with nginx for virtualbox
+# packer-xenial-flask
+A vagrant box based on ubuntu xenial with flask for virtualbox
 
 # Prerequisites
 ## Install vagrant
@@ -20,11 +20,17 @@ ToDo
 ToDO
     
 
+# How to clean up
+    
+    make
+
+
 # Purpose
 
 This repository attempts to store the minimum amount of code that is required to create a:
 - Ubuntu Xenial64 box
-- with standard nginx
+- With Flask running in development mode on port 8080
+- with standard nginx rerouting port 80 to 8080
 - using Packer
 - for VirtualBox
 
@@ -35,6 +41,7 @@ This repository attempts to store the minimum amount of code that is required to
 
 # Done
 - [x] add nginx to box
+- [x] add flask to box
 - [x] create json template file
 - [x] copy boot provisioning script
 - [x] create makefile
