@@ -1,7 +1,7 @@
 {
   "variables": {
-    "name": "krastin/nginx64-2",
-    "build_name": "nginx64-2",
+    "name": "krastin/pythonweb",
+    "build_name": "pythonweb",
     "build_cpu_cores": "2",
     "build_memory": "1024",
     "cpu_cores": "1",

@@ -2,14 +2,14 @@ vm-provider := vbox
 
 default: all
 
-all: nginx64-2-vbox.box
+all: pythonweb-vbox.box
 
-nginx64-2-vbox.box: nginx64.json scripts/provision.sh http/preseed.cfg
-	packer validate nginx64.json
-	packer build -force -only=nginx64-2-vbox nginx64.json
-	vagrant box add ./nginx64-2-vbox.box  --name nginx64-2
+pythonweb-vbox.box: template.json scripts/provision.sh http/preseed.cfg
+	packer validate template.json
+	packer build -force -only=pythonweb-vbox template.json
+	vagrant box add ./pythonweb-vbox.box  --name pythonweb
 
 .PHONY: clean
 clean:
-	-vagrant box remove -f nginx64-2 --provider virtualbox
+	-vagrant box remove -f pythonweb --provider virtualbox
 	-rm -fr output-*/ *.box

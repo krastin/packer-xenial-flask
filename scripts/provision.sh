@@ -52,11 +52,59 @@ rm $VBOX_ISO
 DEBIAN_FRONTEND=noninteractive DEBIAN_PRIORITY=critical apt-get -q -y -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" upgrade
 
 ## Box specific provision
-# Install nginx
-apt-get -y install nginx
+# Install python3 flask and dummy website
+apt-get -y install python3-pip
+python3 -m pip install --user --upgrade pip==9.0.3
+pip3 install virtualenv flask jinja2
+echo 'export LC_ALL="en_US.UTF-8"' >> /etc/bash.bashrc
+echo 'export LC_CTYPE="en_US.UTF-8"' >> /etc/bash.bashrc
+mkdir -p /home/vagrant/flask-website
+cat <<EOF > /etc/systemd/system/flask-website.service
+[Unit]
+Description=Microwebsite application
+After=network.target
+
+[Service]
+User=vagrant
+WorkingDirectory=/home/vagrant/flask-website
+Environment=FLASK_ENV=development
+Environment=FLASK_APP=project.py
+Environment=FLASK_RUN_PORT=8080
+Environment=REDIS_HOST=127.0.0.1
+ExecStart=flask run
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOF
+cat <<EOF > /home/vagrant/flask-website/project.py
+#!/usr/bin/python
+from flask import Flask, escape, request
+
+app = Flask(__name__)
+
+@app.route('/')
+def hello():
+    return 'Hello World!'
+EOF
+systemctl enable flask-website
 
 # Install some tools
-apt-get -y install jq curl unzip
+apt-get -y install jq curl unzip vim tmux
+
+# Install reverse proxy rerouting to high ports >1024
+apt-get -y install nginx
+cat <<EOF > /etc/nginx/sites-available/flask-website
+server {
+    listen 80;
+    location / {
+        proxy_pass http://127.0.0.1:8080/;
+    }
+}
+EOF
+rm -rf /etc/nginx/sites-enabled/*
+ln -s /etc/nginx/sites-available/flask-website /etc/nginx/sites-enabled/
+systemctl enable nginx
 
 apt-get autoremove -y
 apt-get clean
