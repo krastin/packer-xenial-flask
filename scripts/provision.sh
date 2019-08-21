@@ -53,7 +53,7 @@ DEBIAN_FRONTEND=noninteractive DEBIAN_PRIORITY=critical apt-get -q -y -o "Dpkg::
 
 ## Box specific provision
 # Install python3 flask and dummy website
-apt-get -y install python3-pip
+apt-get -y install python3-pip policykit-1
 python3 -m pip install --user --upgrade pip==9.0.3
 pip3 install virtualenv flask jinja2
 echo 'export LC_ALL="en_US.UTF-8"' >> /etc/bash.bashrc
@@ -71,7 +71,7 @@ Environment=FLASK_ENV=development
 Environment=FLASK_APP=project.py
 Environment=FLASK_RUN_PORT=8080
 Environment=REDIS_HOST=127.0.0.1
-ExecStart=flask run
+ExecStart=/usr/local/bin/flask run
 Restart=always
 
 [Install]
