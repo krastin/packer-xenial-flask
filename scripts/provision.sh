@@ -55,7 +55,7 @@ DEBIAN_FRONTEND=noninteractive DEBIAN_PRIORITY=critical apt-get -q -y -o "Dpkg::
 # Install python3 flask and dummy website
 apt-get -y install python3-pip policykit-1
 python3 -m pip install --user --upgrade pip==9.0.3
-pip3 install virtualenv flask jinja2
+pip3 install virtualenv flask jinja2 Flask-And-Redis
 echo 'export LC_ALL="en_US.UTF-8"' >> /etc/bash.bashrc
 echo 'export LC_CTYPE="en_US.UTF-8"' >> /etc/bash.bashrc
 mkdir -p /home/vagrant/flask-website
