@@ -22,7 +22,7 @@ ToDO
 
 # How to clean up
     
-    make
+    make clean
 
 
 # Purpose

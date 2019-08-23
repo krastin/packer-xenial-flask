@@ -1,7 +1,7 @@
 {
   "variables": {
-    "name": "krastin/pythonweb",
-    "build_name": "pythonweb",
+    "name": "krastin/xenial-flask",
+    "build_name": "xenial-flask",
     "build_cpu_cores": "2",
     "build_memory": "1024",
     "cpu_cores": "1",
@@ -25,18 +25,6 @@
     ]
   },
   "builders": [
-    {
-      "type": "amazon-ebs",
-      "region": "us-east-1",
-      "source_ami": "ami-07b4156579ea1d7ba",
-      "instance_type": "t2.micro",
-      "ssh_username": "ubuntu",
-      "ami_name": "nginx64_packer_2_{{timestamp}}",
-      "tags": {
-        "OS Version": "Ubuntu",
-        "Release": "Latest"
-      }
-    },
     {
       "name": "{{ user `build_name` }}-vbox",
       "vm_name": "{{ user `build_name` }}-vbox",
@@ -109,10 +97,10 @@
     }
   ],
   "post-processors": [
-    {
-      "type": "vagrant",
-      "keep_input_artifact": true,
-      "output": "{{.BuildName}}.box"
-    }
+      {
+        "type": "vagrant",
+        "keep_input_artifact": true,
+        "output": "{{.BuildName}}.box"
+      }
   ]
 }
